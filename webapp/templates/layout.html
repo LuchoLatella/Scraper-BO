@@ -1,0 +1,38 @@
+<!doctype html>
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-KZ793SW');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css"/>
+  <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}"/>
+  <title>Boletín Oficial Electrónico - No Oficial - {% block title %}Welcome{% endblock %}</title>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KZ793SW"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <nav class="pa3 pa4-ns bg-washed-green dark-green">
+    <a class="link dim black b f1 f-headline-ns tc db mb3 mb4-ns" href="/" title="Home">Boletín Oficial</a>
+    <h2 class="black b f3 tc db mb3 mb4-ns" href="/" title="Home">Provincia de Córdoba</h2>
+    <div class="tc pb3">
+      <!-- <a class="link dim gray f6 f5-ns dib mr3" href="{{url_for('home')}}" title="Home">Home</a> -->
+      <a class="link dim gray f6 f5-ns dib" href="{{url_for('about')}}" title="Acerca de">Acerca de</a>
+    </div>
+  </nav>
+
+  {% block body %}{% endblock %}
+
+  <footer class="pv4 ph3 ph5-m ph6-l mid-gray footer">
+    <small class="f6 db tc">© 2016 Hecho con cariño por <b class="ttu">OpenDataCórdoba</b>, No Rights Reserved</small>
+    <div class="tc mt3">
+    </div>
+  </footer>
+</body>

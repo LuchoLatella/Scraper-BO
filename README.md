@@ -1,20 +1,46 @@
-# Proyecto de Web Scraping del Boletín Oficial de Argentina
+# Scrapper de los Boletines Oficiales de la Provincia de Cordoba
 
-## Descripción
-Este proyecto utiliza Python y BeautifulSoup para realizar web scraping en la página del Boletín Oficial de Argentina. Extrae datos relevantes como fechas de publicación, títulos de normativas, enlaces y textos de las normas, almacenándolos en un DataFrame.
+Scrapper para descargar todos los boletines oficiales de
+la página del [Gobierno de la Provincia de Córdoba](http://boletinoficial.cba.gov.ar).
 
-## Instalación
-Instala las dependencias necesarias:
-```bash
-pip install -r requirements.txt
+
+## Scraper
+Crear una base de datos llamada `boletin`. Iniciar schema con 
 ```
-## Uso
-
-Ejecuta scrape_boletin.py para iniciar el scraping. Los datos se guardan en un DataFrame y pueden exportarse a otros formatos como CSV o Excel.
-
-```bash
-python scrape_boletin.py
+$ ./main.py init_db
 ```
-## Contribuciones
+y luego correr el scraper con
 
-Las contribuciones son bienvenidas. Si tienes mejoras o sugerencias, abre un issue o envía un pull request.
+```
+$ scrapy crawl boe
+```
+
+## Website
+
+Correr con
+```
+$ FLASK_APP=app.py flask run
+```
+
+## Build
+
+Para construir el sitio estático, correr
+```
+$ python app.py
+```
+con lo que el sitio será construido en `webapp/build`
+
+
+## Deploy
+
+Con las credenciales de aws en algún lugar accesible a boto3, correr:
+```
+$ s3-deploy-website
+```
+
+## Heroku
+
+```
+$ heroku apps:create boletin-cba
+$ heroku addons:create heroku-postgresql:hobby-dev -a boletin-cba
+```

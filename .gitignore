@@ -1,0 +1,6 @@
+webapp/build/
+build/
+tmp/
+boescraper/boletines.jl
+__pycache__/
+boescraper/tmp/
