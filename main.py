@@ -14,7 +14,7 @@ import json
 from shutil import copyfile
 from slugify import slugify
 import os.path
-from PyPDF2 import PdfFileReader, utils
+from PyPDF2 import PdfFileReader, _utils
 from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
 import re
@@ -45,7 +45,7 @@ def scrapear():
     """
     Scrapea iterativamente todos los links a los pdfs de los boletines de
     la pagina:
-        - http://boletinoficial.cba.gov.ar/{year}/{month}/
+        - http://boletinoficial.buenosaires.gob.ar/{year}/{month}/
     Nota:
         - El metodo junta todos los links y los exporta a un txt para luego ser
         usados. Esto no es necesario, pero queria tener una lista de links
@@ -55,10 +55,10 @@ def scrapear():
         que realmente sean. Si hay otros archivos en pdf, tambien los descarga.
     """
     pdf_links = []
-    for year in range(2007, 2018):
+    for year in range(2021, 2024):
         click.echo("Scrapeando links del {0}".format(year))
         for month in range(1, 13):
-            url = "http://boletinoficial.cba.gov.ar/{0}/{1}/".format(year, str(month).zfill(2))
+            url = "http:/boletinoficial.buenosaires.gob.ar/{0}/{1}/".format(year, str(month).zfill(2))
             req = Request(url)
             try:
                 response = urlopen(req)
@@ -70,7 +70,7 @@ def scrapear():
                 click.echo(e.code, " - ", e.reason)
             else:
                 html = response.read()
-                links = re.findall('"(http:\/\/.*?)"', str(html))
+                links = re.findall(r'"(http://.*?)"', str(html))
                 pdf_links.extend([link for link in links if link.endswith('.pdf')])
     click.echo("Links obtenidos, comenzando la escritura a archivo...")
     with open(_TXT_BOLETINES_PATH, "w") as urls_file:
@@ -83,7 +83,7 @@ def scrapear():
 def descargar():
     """
     Descarga iterativamente todos los pdf de la pagina:
-        - http://boletinoficial.cba.gov.ar/{year}/{month}/
+        - http://boletinoficial.buenosaires.gob.ar/{year}/{month}/
     Nota:
         - Utiliza los links obtenidos en el método scrapear_url_boletines
     """

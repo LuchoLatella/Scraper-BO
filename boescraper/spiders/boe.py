@@ -5,8 +5,8 @@ import dateparser
 
 class BoeSpider(scrapy.Spider):
     name = "boe"
-    allowed_domains = ["boletinoficial.cba.gov.ar"]
-    start_urls = ['http://boletinoficial.cba.gov.ar/']
+    allowed_domains = ["boletinoficial.buenosaires.gob.ar"]
+    start_urls = ['https://boletinoficial.buenosaires.gob.ar/']
 
     def parse(self, response):
         for grupo in response.xpath('//*[@id="container_portada"]/div/ul'):
